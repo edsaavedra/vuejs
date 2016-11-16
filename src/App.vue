@@ -1,7 +1,18 @@
-<template></template>
+<template>
+	<div>
+		<header-component></header-component>
+		<home-component></home-component>
+		<footer-component></footer-component>
+	</div>
+</template>
 
 <script>
-export default {}
+import Home from './components/Home.vue'
+export default {
+	components: {
+		'home-component': Home
+	}
+}
 </script>
 
-<style></style>
+<style scoped></style>
