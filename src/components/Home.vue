@@ -2,7 +2,9 @@
 	<div>
 		<search-comp></search-comp>
 		<detail-comp :video="selectedVideo"></detail-comp>
-		<list-comp></list-comp>
+		<list-comp :list="videos"></list-comp>
+		<button @click="updt">Update</button>
+		{{term}}
 	</div>
 </template>
 
@@ -15,28 +17,35 @@ import YISearch from 'youtube-api-search';
 const api_key = 'AIzaSyAI7EUhh8TfsOK6HsEfHiv-x5YmzKTj61U';
 
 export default {
-	data: function(){
-		return {
-			videos: [],
-			selectedVideo: null
-		}
-	},
 	components: {
 		'search-comp': VideoSearch,
 		'detail-comp': VideoDetail,
 		'list-comp': VideoList
 	},
+
+	data: function(){
+		return {
+			videos: [],
+			selectedVideo: null,
+			term: ''
+		}
+	},
+
 	methods: {
 		onSearch(term) {
 			YISearch({key: api_key, term: term}, (videos) => {
 				this.videos = videos;
 				this.selectedVideo = videos[0];
-				console.log(videos)
+				console.log(this.selectedVideo)
 			})
+		},
+		updt(){
+			this.onSearch('dog')
 		}
 	},
+
 	created(){
-		this.onSearch('dog')
+		this.onSearch('cat')
 	}
 }
 </script>

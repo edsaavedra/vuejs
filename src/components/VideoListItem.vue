@@ -1,6 +1,10 @@
 <template>
 	<div>
-		listitem
+		<li v-for="video in videos">{{video.etag}}</li>
 	</div>
 </template>
-<script></script>
+<script>
+	export default {
+		props: ['videos']
+	}
+</script>
