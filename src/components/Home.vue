@@ -1,21 +1,42 @@
 <template>
-	<search-comp></search-comp>
-	<detail-comp></detail-comp>
-	<list-comp></list-comp>
+	<div>
+		<search-comp></search-comp>
+		<detail-comp :video="selectedVideo"></detail-comp>
+		<list-comp></list-comp>
+	</div>
 </template>
 
 <script>
 import VideoSearch from './VideoSearch.vue';
 import VideoDetail from './VideoDetail.vue';
 import VideoList from './VideoList.vue';
+import YISearch from 'youtube-api-search';
 
 const api_key = 'AIzaSyAI7EUhh8TfsOK6HsEfHiv-x5YmzKTj61U';
 
 export default {
-	compoentns: {
-		'sarch-comp': VideoSearch,
+	data: function(){
+		return {
+			videos: [],
+			selectedVideo: null
+		}
+	},
+	components: {
+		'search-comp': VideoSearch,
 		'detail-comp': VideoDetail,
-		'list-comp': Videolist
+		'list-comp': VideoList
+	},
+	methods: {
+		onSearch(term) {
+			YISearch({key: api_key, term: term}, (videos) => {
+				this.videos = videos;
+				this.selectedVideo = videos[0];
+				console.log(videos)
+			})
+		}
+	},
+	created(){
+		this.onSearch('dog')
 	}
 }
 </script>

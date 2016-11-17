@@ -3,3 +3,4 @@
 		listitem
 	</div>
 </template>
+<script></script>
