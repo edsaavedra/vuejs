@@ -1,8 +1,9 @@
 <template>
-	<div>
-		<search-comp></search-comp>
+	<div class="content">
+		<search-comp @searchEvent="onSearch($event)"></search-comp>
 		<detail-comp :video="selectedVideo"></detail-comp>
-		<list-comp></list-comp>
+		<list-comp :videosArray="videos"></list-comp>
+		<button @click="update">update</button>
 	</div>
 </template>
 
@@ -31,13 +32,13 @@ export default {
 			YISearch({key: api_key, term: term}, (videos) => {
 				this.videos = videos;
 				this.selectedVideo = videos[0];
-				console.log(videos)
 			})
+		},
+		update() {
+			this.onSearch('cat')
 		}
 	},
-	created(){
-		this.onSearch('dog')
-	}
+
 }
 </script>
 
