@@ -16,17 +16,20 @@ import YISearch from 'youtube-api-search';
 const api_key = 'AIzaSyAI7EUhh8TfsOK6HsEfHiv-x5YmzKTj61U';
 
 export default {
-	data: function(){
-		return {
-			videos: [],
-			selectedVideo: null
-		}
-	},
 	components: {
 		'search-comp': VideoSearch,
 		'detail-comp': VideoDetail,
 		'list-comp': VideoList
 	},
+
+	data: function(){
+		return {
+			videos: [],
+			selectedVideo: null,
+			term: ''
+		}
+	},
+
 	methods: {
 		onSearch(term) {
 			YISearch({key: api_key, term: term}, (videos) => {
@@ -37,8 +40,7 @@ export default {
 		update() {
 			this.onSearch('cat')
 		}
-	},
-
+	}
 }
 </script>
 

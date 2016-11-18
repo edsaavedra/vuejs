@@ -8,6 +8,7 @@
 			<div>{{title}}</div>
 			<div>{{description}}</div>
 		</div>
+		<slot></slot>
 	</div>
 </template>
 
@@ -29,5 +30,4 @@
 			console.log('updt')
 		}
 	}
-
 </script>

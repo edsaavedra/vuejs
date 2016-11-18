@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Home from './components/Home.vue';
 export default {
 	components: {
 		'home-component': Home
@@ -16,3 +16,4 @@ export default {
 </script>
 
 <style scoped></style>
+
