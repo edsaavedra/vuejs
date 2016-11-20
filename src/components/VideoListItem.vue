@@ -1,5 +1,5 @@
 <template>
-	<li class="list-group-item">
+	<li class="list-group-item" @click="selectVideo(singleVideo)">
 		<div class="video-list media">
 			<div class="media-left">
 				<img class="media-object" :src="singleVideo.snippet.thumbnails.default.url"/>
@@ -11,7 +11,13 @@
 	</li>
 </template>
 <script>
+	import {eventBus} from '../main'
 	export default {
-		props: ['singleVideo']
+		props: ['singleVideo'],
+		methods: {
+			selectVideo(video){
+				eventBus.$emit('selectedVideo', video);
+			}
+		}
 	}
 </script>

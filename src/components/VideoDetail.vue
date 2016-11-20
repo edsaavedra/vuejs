@@ -5,14 +5,15 @@
 			<iframe class="enbed-reposive-item" :src="url" />
 		</div>
 		<div class="details">
-			<div>{{title}}</div>
+			<div>{{title | toUppercase}}</div>
 			<div>{{description}}</div>
 		</div>
-		<slot></slot>
 	</div>
 </template>
 
 <script>
+	import {eventBus} from '../main';
+
 	export default {
 		props: ['video'],
 		data: function(){
@@ -22,12 +23,23 @@
 				title: '',
 				description: ''}
 		},
-		updated() {
-			this.load = '';
-			this.url = 'https://youtube.com/embed/' + this.video.id.videoId;
-			this.title = this.video.snippet.title;
-			this.description = this.video.snippet.description;
-			console.log('updt')
+		methods: {
+			setVideo(video) {
+				this.url = 'https://youtube.com/embed/' + video.id.videoId;
+				this.title = video.snippet.title;
+				this.description = video.snippet.description;
+			}
+		},
+		filters: {
+			toUppercase(v, t){
+				return v.toUpperCase()
+			}
+		},
+		created() {
+			this.setVideo(this.video);
+			eventBus.$on('selectedVideo', (data) => {
+				this.setVideo(data)
+			})
 		}
 	}
 </script>

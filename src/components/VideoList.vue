@@ -5,7 +5,6 @@
 </template>
 <script>
 	import VideoListItem from './VideoListItem.vue';
-
 	export default{
 		props: ['videosArray'],
 		components: {
